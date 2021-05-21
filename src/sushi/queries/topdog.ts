@@ -18,7 +18,7 @@ import type {
 } from '../../../types'
 
 import type {
-    MasterChef,
+    TopDog,
     Pool, User,
 } from '../../../types/subgraphs/topdog'
 
@@ -30,13 +30,13 @@ export async function info({block = undefined, timestamp = undefined}: Arg1 = {}
 
     const result = await request(graphAPIEndpoints.topdog,
         gql`{
-                masterChef(id: "${chefAddress}", ${blockString}) {
+                topDog(id: "${chefAddress}", ${blockString}) {
                     ${info_properties.toString()}
                 }
             }`
     );
 
-    return info_callback(result.masterChef);
+    return info_callback(result.topDog);
 }
 
 
@@ -235,7 +235,7 @@ const info_properties = [
     'updatedAt'
 ];
 
-function info_callback(result: MasterChef) {
+function info_callback(result: TopDog) {
     return ({
         bonusMultiplier: Number(result.bonusMultiplier),
         bonusEndBlock: Number(result.bonusEndBlock),

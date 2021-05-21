@@ -1,4 +1,4 @@
-export type MasterChef = {
+export type TopDog = {
     id?: string,
     bonusMultiplier?: string,
     bonusEndBlock?: string,
@@ -23,7 +23,7 @@ export type MasterChef = {
 
 export type History = {
     id?: string,
-    owner?: MasterChef,
+    owner?: TopDog,
     slpBalance?: string,
     slpAge?: string,
     slpAgeRemoved?: string,
@@ -36,7 +36,7 @@ export type History = {
 
 export type Pool = {
     id?: string,
-    owner?: MasterChef,
+    owner?: TopDog,
     pair?: string,
     allocPoint?: string,
     lastRewardBlock?: string,
