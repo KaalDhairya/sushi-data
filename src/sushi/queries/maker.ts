@@ -106,13 +106,13 @@ export default {
 
 const info_properties = [
     'id',
-    'sushiServed'
+    'shibServed'
 ];
 
 function info_callback(result: Maker) {
     return ({
         address: String(result.id),
-        sushiServed: Number(result.sushiServed)
+        shibServed: Number(result.shibServed)
     });
 }
 
@@ -124,7 +124,7 @@ const servings_properties = [
     'pair',
     'token0',
     'token1',
-    'sushiServed',
+    'shibServed',
     'block',
     'timestamp'
 ];
@@ -136,7 +136,7 @@ function servings_callback(results: Serving[]) {
         pair: String(result.pair),
         token0: String(result.token0),
         token1: String(result.token1),
-        sushiServed: Number(result.sushiServed),
+        shibServed: Number(result.shibServed),
         block: Number(result.block),
         timestamp: Number(result.timestamp) * 1000,
         date: new Date(Number(result.timestamp) * 1000)
@@ -147,19 +147,19 @@ function servings_callback(results: Serving[]) {
 
 const servers_properties = [
     'id',
-    'sushiServed',
-    'servings(first: 1000, orderBy: block, orderDirection: desc) { tx, block, pair, sushiServed }'
+    'shibServed',
+    'servings(first: 1000, orderBy: block, orderDirection: desc) { tx, block, pair, shibServed }'
 ];
     
 function servers_callback(results: Server[]) {
-    return results.map(({ id, sushiServed, servings }) => ({
+    return results.map(({ id, shibServed, servings }) => ({
         serverAddress: String(id),
-        sushiServed: Number(sushiServed),
+        shibServed: Number(shibServed),
         servings: servings?.map(serving => ({
             tx: String(serving.tx),
             block: Number(serving.block),
             pair: String(serving.pair),
-            sushiServed: Number(serving.sushiServed)
+            shibServed: Number(serving.shibServed)
         })),
     }));
 }

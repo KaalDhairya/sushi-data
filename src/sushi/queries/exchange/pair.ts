@@ -29,7 +29,7 @@ import { Pair } from '../../../../types/subgraphs/exchange';
 export async function pair({block = undefined, timestamp = undefined, address}: (
     Arg1 & {address: string}
 )) {
-    if(!address) { throw new Error("sushi-data: Pair address undefined"); }
+    if(!address) { throw new Error("shib-data: Pair address undefined"); }
 
     block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
     const blockString = block ? `block: { number: ${block} }` : "";
@@ -53,7 +53,7 @@ export async function pairChange({block = undefined, timestamp = undefined, spac
         address: string
     }
 )) {
-    if(!address) { throw new Error("sushi-data: Pair address undefined"); }
+    if(!address) { throw new Error("shib-data: Pair address undefined"); }
     
     const timestampNow = timestamp ? timestamp : block ? await blockToTimestamp(block) : (Math.floor(Date.now() / 1000));
     const timestamp1ago = timestampNow - spacing;
@@ -84,7 +84,7 @@ export async function pairChange({block = undefined, timestamp = undefined, spac
 export async function pairChart({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, min = 10, max = undefined, spacing = TWENTY_FOUR_HOURS, address}: (
     Arg5 & {address: string}
 )) {
-    if(!address) { throw new Error("sushi-data: Pair address undefined"); }
+    if(!address) { throw new Error("shib-data: Pair address undefined"); }
     
     minTimestamp = minBlock ? await blockToTimestamp(minBlock) : minTimestamp;
     maxTimestamp = maxBlock ? await blockToTimestamp(maxBlock) : maxTimestamp;
@@ -127,7 +127,7 @@ export async function pairChart({minTimestamp = undefined, maxTimestamp = undefi
 
 
 export function observePair({address}: {address: string}) {
-    if(!address) { throw new Error("sushi-data: Pair address undefined"); }
+    if(!address) { throw new Error("shib-data: Pair address undefined"); }
 
     const query = gql`
         subscription {

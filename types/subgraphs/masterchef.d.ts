@@ -6,8 +6,8 @@ export type MasterChef = {
     migrator?: string,
     owner?: string,
     startBlock?: string,
-    sushi?: string,
-    sushiPerBlock?: string,
+    shib?: string,
+    shibPerBlock?: string,
     totalAllocPoint?: string,
     pools?: Pool[],
     poolCount?: string,
@@ -40,7 +40,7 @@ export type Pool = {
     pair?: string,
     allocPoint?: string,
     lastRewardBlock?: string,
-    accSushiPerShare?: string,
+    accShibPerShare?: string,
     balance?: string,
     users?: User[],
     userCount?: string,
@@ -54,8 +54,8 @@ export type Pool = {
     updatedAt?: string,
     entryUSD?: string,
     exitUSD?: string,
-    sushiHarvested?: string,
-    sushiHarvestedUSD?: string
+    shibHarvested?: string,
+    shibHarvestedUSD?: string
 }
 
 
@@ -72,8 +72,8 @@ export type PoolHistory = {
     block?: string,
     entryUSD?: string,
     exitUSD?: string,
-    sushiHarvested?: string,
-    sushiHarvestedUSD?: string
+    shibHarvested?: string,
+    shibHarvestedUSD?: string
 }
 
 
@@ -85,8 +85,8 @@ export type User = {
     rewardDebt?: string,
     entryUSD?: string,
     exitUSD?: string,
-    sushiHarvested?: string,
-    sushiHarvestedUSD?: string,
+    shibHarvested?: string,
+    shibHarvestedUSD?: string,
     timestamp?: string,
     block?: string
 }

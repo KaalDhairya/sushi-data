@@ -1,6 +1,6 @@
 export type Maker = {
     id?: string,
-    sushiServed?: string,
+    shibServed?: string,
     servers?: Server[],
     servings?: Serving[]
 }
@@ -9,7 +9,7 @@ export type Maker = {
 export type Server = {
     id?: string,
     maker?: Maker,
-    sushiServed?: string,
+    shibServed?: string,
     servings?: Serving[]
 }
 
@@ -22,7 +22,7 @@ export type Serving = {
     pair?: string,
     token0?: string,
     token1?: string,
-    sushiServed?: string,
+    shibServed?: string,
     block?: string,
     timestamp?: string
 }

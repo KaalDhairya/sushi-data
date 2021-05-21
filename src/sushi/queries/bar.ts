@@ -66,7 +66,7 @@ export function observeInfo() {
 
 
 export async function user({block = undefined, timestamp = undefined, address}: Arg1 & {address: string}) {
-    if(!address) { throw new Error("sushi-data: User address undefined"); }
+    if(!address) { throw new Error("shib-data: User address undefined"); }
 
     block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
     const blockString = block ? `block: { number: ${block} }` : "";
@@ -93,18 +93,18 @@ export default {
 const info_properties = [
     'decimals',
     'name',
-    'sushi',
+    'shib',
     'symbol',
     'totalSupply',
     'ratio',
-    'xSushiMinted',
-    'xSushiBurned',
-    'sushiStaked',
-    'sushiStakedUSD',
-    'sushiHarvested',
-    'sushiHarvestedUSD',
-    'xSushiAge',
-    'xSushiAgeDestroyed',
+    'xShibMinted',
+    'xShibBurned',
+    'shibStaked',
+    'shibStakedUSD',
+    'shibHarvested',
+    'shibHarvestedUSD',
+    'xShibAge',
+    'xShibAgeDestroyed',
     'updatedAt'
 ];
 
@@ -112,18 +112,18 @@ function info_callback(results: Bar) {
     return ({
         decimals: Number(results.decimals),
         name: String(results.name),
-        sushi: String(results.sushi),
+        shib: String(results.shib),
         symbol: String(results.symbol),
         totalSupply: Number(results.totalSupply),
         ratio: Number(results.ratio),
-        xSushiMinted: Number(results.xSushiMinted),
-        xSushiBurned: Number(results.xSushiBurned),
-        sushiStaked: Number(results.totalSupply) * Number(results.ratio),
-        sushiStakedUSD: Number(results.sushiStakedUSD),
-        sushiHarvested: Number(results.sushiHarvested),
-        sushiHarvestedUSD: Number(results.sushiHarvestedUSD),
-        xSushiAge: Number(results.xSushiAge),
-        xSushiAgeDestroyed: Number(results.xSushiAgeDestroyed),
+        xShibMinted: Number(results.xShibMinted),
+        xShibBurned: Number(results.xShibBurned),
+        shibStaked: Number(results.totalSupply) * Number(results.ratio),
+        shibStakedUSD: Number(results.shibStakedUSD),
+        shibHarvested: Number(results.shibHarvested),
+        shibHarvestedUSD: Number(results.shibHarvestedUSD),
+        xShibAge: Number(results.xShibAge),
+        xShibAgeDestroyed: Number(results.xShibAgeDestroyed),
         updatedAt: Number(results.updatedAt)
     })
 };
@@ -131,47 +131,47 @@ function info_callback(results: Bar) {
 
 
 const user_properties = [
-    'xSushi',
-    'xSushiIn',
-    'xSushiOut',
-    'xSushiMinted',
-    'xSushiBurned',
-    'xSushiOffset',
-    'xSushiAge',
-    'xSushiAgeDestroyed',
-    'sushiStaked',
-    'sushiStakedUSD',
-    'sushiHarvested',
-    'sushiHarvestedUSD',
-    'sushiIn',
-    'sushiOut',
+    'xShib',
+    'xShibIn',
+    'xShibOut',
+    'xShibMinted',
+    'xShibBurned',
+    'xShibOffset',
+    'xShibAge',
+    'xShibAgeDestroyed',
+    'shibStaked',
+    'shibStakedUSD',
+    'shibHarvested',
+    'shibHarvestedUSD',
+    'shibIn',
+    'shibOut',
     'usdOut',
     'usdIn',
     'updatedAt',
-    'sushiOffset',
+    'shibOffset',
     'usdOffset'
 ];
 
 function user_callback(results: User) {
     return ({
-        xSushi: Number(results.xSushi),
-        xSushiIn: Number(results.xSushiIn),
-        xSushiOut: Number(results.xSushiOut),
-        xSushiMinted: Number(results.xSushiMinted),
-        xSushiBurned: Number(results.xSushiBurned),
-        xSushiOffset: Number(results.xSushiOffset),
-        xSushiAge: Number(results.xSushiAge),
-        xSushiAgeDestroyed: Number(results.xSushiAgeDestroyed),
-        sushiStaked: Number(results.sushiStaked),
-        sushiStakedUSD: Number(results.sushiStakedUSD),
-        sushiHarvested: Number(results.sushiHarvested),
-        sushiHarvestedUSD: Number(results.sushiHarvestedUSD),
-        sushiIn: Number(results.sushiIn),
-        sushiOut: Number(results.sushiOut),
+        xShib: Number(results.xShib),
+        xShibIn: Number(results.xShibIn),
+        xShibOut: Number(results.xShibOut),
+        xShibMinted: Number(results.xShibMinted),
+        xShibBurned: Number(results.xShibBurned),
+        xShibOffset: Number(results.xShibOffset),
+        xShibAge: Number(results.xShibAge),
+        xShibAgeDestroyed: Number(results.xShibAgeDestroyed),
+        shibStaked: Number(results.shibStaked),
+        shibStakedUSD: Number(results.shibStakedUSD),
+        shibHarvested: Number(results.shibHarvested),
+        shibHarvestedUSD: Number(results.shibHarvestedUSD),
+        shibIn: Number(results.shibIn),
+        shibOut: Number(results.shibOut),
         usdOut: Number(results.usdOut),
         usdIn: Number(results.usdIn),
         updatedAt: Number(results.updatedAt),
-        sushiOffset: Number(results.sushiOffset),
+        shibOffset: Number(results.shibOffset),
         usdOffset: Number(results.usdOffset)
     })
 };

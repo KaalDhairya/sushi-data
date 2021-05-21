@@ -9,7 +9,7 @@ import { LiquidityPosition, LiquidityPositionSnapshot } from '../../../types/sub
 export async function userHistory({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, max = undefined,  address}: (
     Arg4 & {address: string}
 )) {
-    if(!address) { throw new Error("sushi-data: User address undefined"); }
+    if(!address) { throw new Error("shib-data: User address undefined"); }
 
     const results = await pageResults({
         api: graphAPIEndpoints.exchange_v1,
@@ -37,7 +37,7 @@ export async function userHistory({minTimestamp = undefined, maxTimestamp = unde
 export async function userPositions({block = undefined, timestamp = undefined, address}: (
     Arg1 & {address: string}
 )) {
-    if(!address) { throw new Error("sushi-data: User address undefined"); }
+    if(!address) { throw new Error("shib-data: User address undefined"); }
 
     const results = await pageResults({
         api: graphAPIEndpoints.exchange_v1,

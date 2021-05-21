@@ -18,7 +18,7 @@ import { KashiPair } from '../../../types/subgraphs/bentobox';
 export async function pair({block = undefined, timestamp = undefined, address}: (
     Arg1 & {address: string}
 )) {
-    if(!address) { throw new Error("sushi-data: Pair address undefined"); }
+    if(!address) { throw new Error("shib-data: Pair address undefined"); }
 
     block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
     const blockString = block ? `block: { number: ${block} }` : "";

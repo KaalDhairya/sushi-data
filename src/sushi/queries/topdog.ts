@@ -10,17 +10,17 @@ import {
 } from '../../utils';
 
 import { pairs as exchangePairs } from './exchange';
-import { priceUSD as sushiPriceUSD } from'./sushi';
+import { priceUSD as sushiPriceUSD } from'./shib';
 
 import type {
     Arg1,
     Awaited,
-} from './../../../types'
+} from '../../../types'
 
 import type {
     MasterChef,
     Pool, User,
-} from './../../../types/subgraphs/masterchef'
+} from '../../../types/subgraphs/topdog'
 
 
 
@@ -28,7 +28,7 @@ export async function info({block = undefined, timestamp = undefined}: Arg1 = {}
     block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
     const blockString = block ? `block: { number: ${block} }` : "";
 
-    const result = await request(graphAPIEndpoints.masterchef,
+    const result = await request(graphAPIEndpoints.topdog,
         gql`{
                 masterChef(id: "${chefAddress}", ${blockString}) {
                     ${info_properties.toString()}
@@ -54,7 +54,7 @@ export async function pool({block = undefined, timestamp = undefined, poolId = u
 
     let result;
     if(poolId) {
-        result = await request(graphAPIEndpoints.masterchef,
+        result = await request(graphAPIEndpoints.topdog,
             gql`{
                     pool(id: ${poolId}, ${blockString}) {
                         ${pool_properties.toString()}
@@ -64,7 +64,7 @@ export async function pool({block = undefined, timestamp = undefined, poolId = u
     }
 
     else {
-        result = await request(graphAPIEndpoints.masterchef,
+        result = await request(graphAPIEndpoints.topdog,
             gql`{
                     pools(first: 1, where: {pair: "${address!.toLowerCase()}"}, ${blockString}) {
                         ${pool_properties.toString()}
@@ -80,7 +80,7 @@ export async function pool({block = undefined, timestamp = undefined, poolId = u
 
 export async function pools({block = undefined, timestamp = undefined}: Arg1 = {}) {
     const results = await pageResults({
-        api: graphAPIEndpoints.masterchef,
+        api: graphAPIEndpoints.topdog,
         query: {
             entity: 'pools',
             selection: {
@@ -122,7 +122,7 @@ export async function user({block = undefined, timestamp = undefined, address}: 
     if(!address) { throw new Error("sushi-data: User address undefined"); }
 
     const results = await pageResults({
-        api: graphAPIEndpoints.masterchef,
+        api: graphAPIEndpoints.topdog,
         query: {
             entity: 'users',
             selection: {
@@ -142,7 +142,7 @@ export async function user({block = undefined, timestamp = undefined, address}: 
 
 export async function users({block = undefined, timestamp = undefined}: Arg1 = {}) {
     const results = await pageResults({
-        api: graphAPIEndpoints.masterchef,
+        api: graphAPIEndpoints.topdog,
         query: {
             entity: 'users',
             selection: {
@@ -159,7 +159,7 @@ export async function users({block = undefined, timestamp = undefined}: Arg1 = {
 
 export async function apys({block = undefined, timestamp = undefined}: Arg1 = {}) {
     const [
-        masterchefList,
+        topdogList,
         exchangeList,
         sushiUSD
      ] = await Promise.all([
@@ -168,21 +168,21 @@ export async function apys({block = undefined, timestamp = undefined}: Arg1 = {}
         sushiPriceUSD({block, timestamp})
      ]);
 
-    const totalAllocPoint = masterchefList.reduce((a, b) => a + b.allocPoint, 0);
+    const totalAllocPoint = topdogList.reduce((a, b) => a + b.allocPoint, 0);
 
     const averageBlockTime = await getAverageBlockTime({block, timestamp});
 
-    return masterchefList.map(masterchefPool => {
-        const exchangePool = exchangeList.find((e: any) => e.id === masterchefPool.pair);
+    return topdogList.map(topdogPool => {
+        const exchangePool = exchangeList.find((e: any) => e.id === topdogPool.pair);
         if(!exchangePool) {
-            return {...masterchefPool, apy: 0};
+            return {...topdogPool, apy: 0};
         }
 
-        const tvl = masterchefPool.slpBalance * (exchangePool.reserveUSD / exchangePool.totalSupply);
-        const sushiPerBlock = (masterchefPool.allocPoint / (totalAllocPoint) * 100);
+        const tvl = topdogPool.slpBalance * (exchangePool.reserveUSD / exchangePool.totalSupply);
+        const sushiPerBlock = (topdogPool.allocPoint / (totalAllocPoint) * 100);
         const apy = sushiUSD * (sushiPerBlock * (60 / averageBlockTime) * 60 * 24 * 365) / tvl * 100 * 3; // *3 => vesting
 
-        return {...masterchefPool, apy};
+        return {...topdogPool, apy};
     });
 }
 
